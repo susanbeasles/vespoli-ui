@@ -32,4 +32,4 @@ jobs:
           test -n "$ACTIONS_ID_TOKEN_REQUEST_TOKEN"
           export NPM_CONFIG_USERCONFIG="$RUNNER_TEMP/npm-oidc-only.npmrc"
           echo 'registry=https://registry.npmjs.org/' > "$NPM_CONFIG_USERCONFIG"
-          npm publish --workspace vespoli-ui --access public --provenance
+          npm publish --workspace vespoli-ui --access public --provenance --loglevel=verbose
