@@ -1,0 +1,54 @@
+name: Component quality
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: components-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - run: npm run check
+      - run: npm run bench -- --out artifacts/current
+      - name: Benchmark the base revision on the same runner
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          mkdir .baseline
+          git archive "$BASE_SHA" | tar -x -C .baseline
+          if test -f .baseline/scripts/bench.ts; then
+            cd .baseline
+            npm ci --ignore-scripts
+            npm run bench -- --out ../artifacts/base --no-gate
+          else
+            echo 'No benchmark harness exists in the base revision; current absolute budgets remain enforced.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Compare component regressions
+        if: github.event_name == 'pull_request'
+        run: |
+          if test -f artifacts/base/report.json; then
+            node scripts/compare-bench.ts artifacts/current/report.json artifacts/base/report.json
+          fi
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        if: always()
+        with:
+          name: component-benchmarks-${{ github.sha }}
+          path: artifacts/
+          retention-days: 90

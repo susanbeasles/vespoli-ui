@@ -1,0 +1,39 @@
+{
+  "name": "vespoli-ui-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "node scripts/build-ui.ts --library",
+    "test": "vitest run",
+    "check": "npm run build && npm test && node scripts/check-package.ts",
+    "bench:build": "node scripts/build-bench.ts",
+    "bench": "npm run bench:build && node scripts/bench.ts"
+  },
+  "dependencies": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.8",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "chrome-launcher": "^1.2.2",
+    "esbuild": "^0.28.2",
+    "jsdom": "^30.1.3",
+    "lighthouse": "^13.5.0",
+    "typescript": "^5.7.3",
+    "vitest": "^5.0.5"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}
