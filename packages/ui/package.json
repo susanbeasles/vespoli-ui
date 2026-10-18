@@ -1,6 +1,6 @@
 {
   "name": "vespoli-ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Controlled React components for clear, accessible data interfaces.",
   "type": "module",
   "license": "MIT",
