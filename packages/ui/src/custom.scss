@@ -1,0 +1,25 @@
+// Consumer overrides belong in a later cascade layer. This file is compiled
+// at build time and never ships as a runtime Sass dependency.
+.vui-dialog {
+  margin: auto;
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  &__body { margin-block: 1rem; }
+  &__actions { display: flex; justify-content: flex-end; gap: 0.5rem; }
+}
+.vui-combobox {
+  &[data-disabled="true"] { opacity: 0.55; }
+  &__empty { padding: 0.75rem; color: var(--vui-color-muted); }
+}
+@keyframes vui-dialog-enter {
+  from { opacity: 0; transform: translateY(0.35rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vui-dialog[open] { animation: none; }
+}
