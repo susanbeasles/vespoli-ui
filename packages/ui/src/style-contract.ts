@@ -12,9 +12,12 @@ export type TokenName =
   | 'color.accent' | 'color.onAccent' | 'color.accentHover'
   | 'color.hover' | 'color.selected' | 'color.danger' | 'color.warning';
 
-export type StyleValue = string | number;
-export type StyleRule = {
-  [property: string]: StyleValue | StyleRule;
+import type {CSSProperties} from 'react';
+
+export type StyleRule = CSSProperties & {
+  [selector: `&${string}`]: StyleRule | undefined;
+  [condition: `@media ${string}`]: StyleRule | undefined;
+  [variable: `--${string}`]: string | number | undefined;
 };
 export interface StyleRecipe {
   selector: string;
