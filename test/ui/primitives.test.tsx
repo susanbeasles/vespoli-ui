@@ -31,7 +31,7 @@ test('Dialog uses a native modal and Escape delegates to the controlled owner',(
   const modal=screen.getByRole('dialog',{name:'Details'});
   expect(modal).toHaveAttribute('open');
   expect(modal).toHaveAccessibleDescription('Context');
-  fireEvent.cancel(modal);
+  fireEvent(modal,new Event('cancel',{bubbles:false,cancelable:true}));
   expect(change).toHaveBeenCalledWith(false);
   rerender(<Dialog open={false} title="Details" onOpenChange={change}>Body</Dialog>);
   expect(modal).not.toHaveAttribute('open');
