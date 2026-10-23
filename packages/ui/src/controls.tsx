@@ -1,6 +1,14 @@
 import type {ButtonHTMLAttributes,InputHTMLAttributes,SelectHTMLAttributes,ReactNode} from 'react';
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{variant?:'primary'|'secondary'|'quiet'}
-export function Button({variant='secondary',className='',type='button',...props}:ButtonProps){return <button type={type} className={`vui-button vui-button-${variant} ${className}`} {...props}/>}
+export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>,'size'> {
+  variant?:'primary'|'secondary'|'quiet';
+  size?:'sm'|'md'|'lg';
+  loading?:boolean;
+}
+export function Button({variant='secondary',size='md',loading=false,className='',type='button',disabled,...props}:ButtonProps){
+  return <button {...props} type={type} className={'vui-button vui-button-'+variant+' '+className}
+    data-variant={variant} data-size={size} data-loading={loading||undefined}
+    disabled={disabled||loading} aria-busy={loading||undefined}/>;
+}
 export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement>{id:string;label:string;hint?:string}
 export function TextField({id,label,hint,className='',...props}:TextFieldProps){return <div className={'vui-field '+className}><label htmlFor={id}>{label}</label><input id={id} aria-describedby={hint?id+'-hint':undefined} {...props}/>{hint&&<small id={id+'-hint'}>{hint}</small>}</div>}
 export interface Option {label:string;value:string}

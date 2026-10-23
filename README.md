@@ -54,3 +54,7 @@ Every exported runtime component has an isolated benchmark fixture. Workflows re
 Pull requests benchmark the base revision and proposed revision on the same runner, then enforce versioned absolute budgets and regression tolerances. Environment mismatches fail rather than comparing unrelated machines. Lighthouse scores apply to tested fixtures; they do not certify WCAG conformance or guarantee accessibility under arbitrary consumer props. Keyboard, focus, zoom/reflow, reduced motion and assistive-technology reviews still matter. Mobile page compositions are checked separately.
 
 Source and workflows: https://github.com/susanbeasles/vespoli-ui
+
+## Compile-time styles and semantic themes
+
+See [the compiled style system](docs/STYLE_SYSTEM.md) for the Sass pipeline, typed recipes, light/dark tokens, interactive primitives, and current limitations.

@@ -18,7 +18,12 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./styles.css": "./dist/styles.css"
+    "./styles.css": "./dist/styles.css",
+    "./style-contract": {
+      "types": "./dist/style-contract.d.ts",
+      "import": "./dist/style-contract.js",
+      "require": "./dist/style-contract.cjs"
+    }
   },
   "sideEffects": [
     "**/*.css"

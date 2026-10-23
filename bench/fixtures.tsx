@@ -23,6 +23,8 @@ const cases:Record<string,(tick:number)=>ReactNode>={
  Code:n=><UI.Code>{'identity-'+n}</UI.Code>,
  CodeBlock:n=><UI.CodeBlock label="Record source" value={JSON.stringify({version:n,items:Array.from({length:40},(_,id)=>({id,name:'Record '+id}))},null,2)}/>,
  Table:n=><UI.Table caption="Record inventory" rows={Array.from({length:100},(_,id)=>({id,name:'Record '+(id+n),status:id%2?'Active':'Pending'}))} rowKey={r=>r.id} columns={[{id:'name',header:'Name',cell:r=>r.name},{id:'status',header:'Status',cell:r=><UI.Badge>{r.status}</UI.Badge>},{id:'action',header:'Action',cell:r=><UI.Button onClick={noop}>Inspect {r.id}</UI.Button>}]}/>,
+ Dialog:n=><UI.Dialog open title={'Record '+n} description="Modal details" onOpenChange={noop}>Record details</UI.Dialog>,
+ Combobox:n=><UI.Combobox label="Repository" value={n%2?'alpha':'beta'} options={[{value:'alpha',label:'Alpha'},{value:'beta',label:'Beta'}]} onValueChange={noop}/>,
  Inspector:n=><UI.Inspector open title={'Record '+n} onClose={noop} description="Read-only record inspection"><UI.CodeBlock label="Original record" value={JSON.stringify({id:n,source:'Example'},null,2)}/></UI.Inspector>,
  Icon:n=><span aria-label="Activity indicator" role="img"><UI.Icon name={n%2?'activity':'layers'}/></span>,
 };
