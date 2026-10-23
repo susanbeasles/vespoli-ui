@@ -5,3 +5,5 @@ export * from './table.js';
 export * from './inspector.js';
 export * from './icon.js';
 export * from './properties.js';
+export * from './dialog.js';
+export * from './combobox.js';
