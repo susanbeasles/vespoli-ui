@@ -23,3 +23,23 @@
 @media (prefers-reduced-motion: reduce) {
   .vui-dialog[open] { animation: none; }
 }
+
+.vui-button[data-loading="true"]::before {
+  content: "";
+  width: 0.85em;
+  height: 0.85em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: vui-progress 700ms linear infinite;
+}
+@keyframes vui-progress {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vui-button[data-loading="true"]::before {
+    animation: none;
+    border-style: dotted;
+  }
+}

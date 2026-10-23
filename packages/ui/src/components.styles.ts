@@ -10,7 +10,9 @@ export const components = defineStyles({
     base: {
       gap: token('space.2'),
       borderRadius: token('radius.sm'),
-      transition: 'background-color var(--vui-motion-fast) ease, color var(--vui-motion-fast) ease',
+      '@media (prefers-reduced-motion: no-preference)': {
+        transition: 'background-color var(--vui-motion-fast) ease, color var(--vui-motion-fast) ease'
+      },
       '&:focus-visible': {
         outline: '2px solid var(--vui-color-accent)',
         outlineOffset: '3px'
